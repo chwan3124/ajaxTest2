@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script>
+            function sync(){
+                $.ajax({
+                    url: 'http://dev.wizlq.com/test',
+                    type: 'post',
+                    cache: false,
+                    timeout: 60000,
+                    async: false,
+                    error: function(e, status, exception){
+                        $(".result_area").append("<p>" + JSON.stringify(e) + "</p>");
+                        $(".result_area").append("<p>" + status + "</p>");
+                        $(".result_area").append("<p>" + exception + "</p>");
+                        console.log(e);
+                        console.log(status);
+                        console.log(exception);
+                    },
+                    success: function(data){
+                        $(".result_area").append("<p>" + data + "</p>");
+                        console.log(data);
+                    }
+                })
+            }
+
+            function async(){
+                $.ajax({
+                    url: 'http://dev.wizlq.com/test',
+                    type: 'post',
+                    cache: false,
+                    timeout: 60000,
+                    async: true,
+                    error: function(e, status, exception){
+                        $(".result_area").append("<p>" + JSON.stringify(e) + "</p>");
+                        $(".result_area").append("<p>" + status + "</p>");
+                        $(".result_area").append("<p>" + exception + "</p>");
+                        console.log(e);
+                        console.log(status);
+                        console.log(exception);
+                    },
+                    success: function(data){
+                        $(".result_area").append("<p>" + data + "</p>");
+                        console.log(data);
+                    }
+                })
+            }
+        </script>
+    </head>
+    <body>
+        <button onclick="sync()">동기 호출</button>
+        <button onclick="async()">비동기 호출</button>
+
+
+        <div class="result_area">
+
+        </div>
+    </body>
+</html>
